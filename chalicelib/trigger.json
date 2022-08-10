@@ -1,0 +1,14 @@
+{   
+    "inreq":"true" ,
+    "message": "hey !!!! " ,
+    "channelid":"6258f41c0ea762bdebe879d0" ,
+	"phone": "+919783921702" ,
+	"email": "None" ,
+	"slack": "U02QGPKBTPU" ,
+	"whatsapp_number": "None" ,
+    "channel": 
+    [
+        "sms" 
+
+    ]
+    }
