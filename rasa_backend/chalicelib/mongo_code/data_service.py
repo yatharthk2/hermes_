@@ -2,20 +2,7 @@
 from typing import List, Optional
 import datetime
 import bson
-# if __package__ is None or __package__ == '':
-#     # uses current directory visibility
-#     from data.owners import Owner
-#     from data.project_c import Project
-#     from data.user import User
-#     from data.channels import Channels
-#     from data.GID import Gid
-# else:
-#     # uses current package visibility
-#     from .data.owners import Owner
-#     from .data.project_c import Project
-#     from .data.user import User
-#     from .data.channels import Channels
-#     from .data.GID import Gid
+
 
 import chalicelib.mongo_code.data as data
 

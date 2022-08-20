@@ -22,6 +22,7 @@ def run():
             s.case('b', register_bot)
             s.case('l', log_into_account)
             s.case('lb', log_into_bot)
+            s.case('gb', get_bot_details)
             s.case('m', lambda: 'change_mode')
             s.case(['x', 'bye', 'exit', 'exit()'], exit_app)
             s.case('?', show_commands)
@@ -146,6 +147,22 @@ def update_bot():
 
     state.active_bot = bot_
     success_msg('Logged in successfully.')
+
+def get_bot_details():
+    print(' ****************** GET BOT DETAILS **************** ')
+    bot_name = input('which bot do you want to see details of ?').strip().lower()
+    bot = svc.find_bot_by_name(bot_name)
+    print(bot)
+
+    if not bot:
+        error_msg(f'Could not find bot {bot_name}.')
+        return
+    # bot_NLU = bot.NLU
+    # bot_Domain = bot.Domain
+    # bot_story = bot.Story
+    # bot_Rules = bot.Rules
+    # bot_Form = bot.Form
+    return bot 
     
 def exit_app():
     print()
