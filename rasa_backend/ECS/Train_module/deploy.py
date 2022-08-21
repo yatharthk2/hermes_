@@ -1,29 +1,32 @@
-from flask import Flask,request,jsonify
+from flask import Flask,jsonify
 import os
-from fetch_mongo import get_bot_details
-from secrets import *
+from fetch_mongo import get_bot_details,global_init
 import boto3
-
+global_init()
 access_key = 'AKIAQSW32ZL55362L35W'
 secret_access_key = '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'
 app = Flask(__name__)
 
-@app.route("/<str:name>", methods=['GET', 'POST'])
+@app.route("/<name>", methods=['GET', 'POST'])
 def deploy(name):
-        os.system("rasa init")
         temp_bot=get_bot_details(name)
-        os.system("cd data")
+        #os.system("cd data")
         temp_bot_NLU = temp_bot.NLU
+        print(temp_bot_NLU)
         temp_bot_Domain = temp_bot.Domain
         temp_bot_story = temp_bot.Story
         temp_bot_Rules = temp_bot.Rules
         temp_bot_Form = temp_bot.Form
-        os.system("echo '{}' > NLU.yml".format(temp_bot_NLU))
-        os.system("echo '{}' > stories.yml".format(temp_bot_story))
-        os.system("echo '{}' > rules.yml".format(temp_bot_Rules))
-        os.system("cd ..")
-        os.system("echo '{}' > domain.yml".format(temp_bot_Domain))
-        os.system("echo '{}' > forms.yml".format(temp_bot_Form))
+        f = open("NLU.yml", "a")
+        f.write(str(temp_bot_NLU))
+        f.close()
+        s="echo '{}' > NLU.yml".format(temp_bot_NLU)
+        #os.system(s)
+        # os.system("echo '{}' > stories.yml".format(temp_bot_story))
+        # os.system("echo '{}' > rules.yml".format(temp_bot_Rules))
+        # #os.system("cd ..")
+        # os.system("echo '{}' > domain.yml".format(temp_bot_Domain))
+        # os.system("echo '{}' > forms.yml".format(temp_bot_Form))
         
         os.system("rasa train --fixed-model-name ./models/{}.gz".format(name))
         client = boto3.client('s3',
@@ -37,5 +40,5 @@ def deploy(name):
     
     
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 8081))
-    app.run(debug=True, host='0.0.0.0', port=port)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(debug=True, port=port)
