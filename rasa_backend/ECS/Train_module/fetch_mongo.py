@@ -24,7 +24,7 @@ def find_bot_by_name(bot_name: str):
     bot1 = bot.objects(botname=bot_name).first()
     return bot1
 
-def get_bot(bot_name):
+def get_bot_details(bot_name):
     print(' ** GET BOT DETAILS ** ')
     bot = find_bot_by_name(bot_name)
     print(bot)
