@@ -17,17 +17,12 @@ def deploy(name):
         temp_bot_story = temp_bot.Story
         temp_bot_Rules = temp_bot.Rules
         temp_bot_Form = temp_bot.Form
-        f = open("NLU.yml", "a")
-        f.write(str(temp_bot_NLU))
-        f.close()
-        s="echo '{}' > NLU.yml".format(temp_bot_NLU)
-        #os.system(s)
-        # os.system("echo '{}' > stories.yml".format(temp_bot_story))
-        # os.system("echo '{}' > rules.yml".format(temp_bot_Rules))
-        # #os.system("cd ..")
-        # os.system("echo '{}' > domain.yml".format(temp_bot_Domain))
-        # os.system("echo '{}' > forms.yml".format(temp_bot_Form))
-        
+        files_s=[{"name":temp_bot_NLU,"type":"NLU.yml"},{"name":temp_bot_Domain,"type":"Domain.yml"},{"name":temp_bot_story,"type":"Story.yml"},{"name":temp_bot_Rules,"type":"Rules.yml"},{"name":temp_bot_Form,"type":"Form.yml"}]
+        for i in files_s:
+                f = open(i["type"], "w")
+                f.write(i["name"])
+                f.close()
+                
         os.system("rasa train --fixed-model-name ./models/{}.gz".format(name))
         client = boto3.client('s3',
                             aws_access_key_id = access_key,
