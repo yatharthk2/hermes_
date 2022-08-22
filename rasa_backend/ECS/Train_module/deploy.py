@@ -1,6 +1,7 @@
+from time import clock_getres
 from flask import Flask,jsonify
 import os
-from fetch_mongo import get_bot_details,global_init
+from fetch_mongo import *
 import boto3
 global_init()
 access_key = 'AKIAQSW32ZL55362L35W'
@@ -20,7 +21,7 @@ def deploy(name):
         files_s=[{"name":temp_bot_NLU,"type":"NLU.yml"},{"name":temp_bot_Domain,"type":"Domain.yml"},{"name":temp_bot_story,"type":"Story.yml"},{"name":temp_bot_Rules,"type":"Rules.yml"},{"name":temp_bot_Form,"type":"Form.yml"}]
         for i in files_s:
                 f = open(i["type"], "w")
-                f.write(i["name"])
+                f.write(str(i["name"]))
                 f.close()
                 
         os.system("rasa train --fixed-model-name ./models/{}.gz".format(name))
@@ -36,4 +37,4 @@ def deploy(name):
     
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
-    app.run(debug=True, port=port)
+    app.run(debug=True, port=port,host="0.0.0.0")
