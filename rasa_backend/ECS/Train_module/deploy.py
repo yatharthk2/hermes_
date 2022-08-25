@@ -4,8 +4,8 @@ import os
 from fetch_mongo import *
 import boto3
 global_init()
-access_key = 'AKIAQSW32ZL55362L35W'
-secret_access_key = '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'
+access_key = 'AKIAYAPVILXZIAVZ3UN2'
+secret_access_key = '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'
 app = Flask(__name__)
 
 @app.route("/<name>", methods=['GET', 'POST'])
@@ -17,24 +17,24 @@ def deploy(name):
         temp_bot_Domain = temp_bot.Domain
         temp_bot_story = temp_bot.Story
         temp_bot_Rules = temp_bot.Rules
-        temp_bot_Form = temp_bot.Form
-        files_s=[{"name":temp_bot_NLU,"type":"NLU.yml"},{"name":temp_bot_Domain,"type":"Domain.yml"},{"name":temp_bot_story,"type":"Story.yml"},{"name":temp_bot_Rules,"type":"Rules.yml"},{"name":temp_bot_Form,"type":"Form.yml"}]
+        
+        files_s=[{"name":temp_bot_NLU,"type":"data/nlu.yml"},{"name":temp_bot_Domain,"type":"domain.yml"},{"name":temp_bot_story,"type":"data/story.yml"},{"name":temp_bot_Rules,"type":"data/rules.yml"}]
         for i in files_s:
                 f = open(i["type"], "w")
                 f.write(str(i["name"]))
                 f.close()
                 
-        os.system("rasa train --fixed-model-name ./models/{}.gz".format(name))
+        os.system("rasa train --fixed-model-name /models/{}.gz".format(name))
         client = boto3.client('s3',
                             aws_access_key_id = access_key,
                             aws_secret_access_key = secret_access_key)
-        file_name="./models/{}.gz".format(name)
-        bucket = 'bots'
-        store_as = 'bots/' + str(name)  
+        file_name="./models/{}.tar.gz".format(name)
+        bucket = 'yatharthk'
+        store_as = '{}.tar.gz'.format(name)  
         client.upload_file(file_name, bucket, store_as)
         return jsonify({"status":"success"})
     
     
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 5000))
-    app.run(debug=True, port=port,host="0.0.0.0")
+    port = int(os.environ.get('PORT', 8000))
+    app.run(debug=True, port=port,host="0.0.0.0")    
