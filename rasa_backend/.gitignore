@@ -1,6 +1,0 @@
-.chalice/deployments/
-.chalice/venv/
-test.py
-yatharth.k_accessKeys.csv
-yatharth.k_accessKeys_final.csv
-.env

@@ -1,0 +1,9 @@
+python-decouple
+boto3
+pymongo
+mongoengine
+pymongo[srv]
+colorama 
+dnspython 
+argparse
+flask

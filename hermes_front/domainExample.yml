@@ -1,0 +1,9 @@
+version: "3.1"
+intents:
+    - Greet
+    - buy_product
+responses:
+  Greet:
+    - text: "Hello, Good morning !"
+  buy_product:
+    - text: "Ok i will show you some items"
