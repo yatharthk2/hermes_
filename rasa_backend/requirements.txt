@@ -6,3 +6,4 @@ pymongo[srv]
 colorama 
 dnspython 
 argparse
+flask

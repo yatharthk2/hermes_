@@ -37,7 +37,7 @@ def run():
 
 
 def show_commands():
-    print('-> New to open notif?')
+    print('-> New to hermes.ai?')
     print('1) [C]reate an [a]ccount')
     print('2) [L]ogin to your account\n')
     print('-> Following actions Requires account login :')

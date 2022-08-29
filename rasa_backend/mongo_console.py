@@ -16,9 +16,9 @@ def main():
 def print_header():
     
 
-    print(Fore.RED + '**************** Open Chatbot  ****************')
+    print(Fore.RED + '**************** Hermes.ai  ****************')
     print(Fore.GREEN )
-    print("Welcome to open_Notif!")
+    print("Welcome to Hermes.ai")
     print()
 
 if __name__ == '__main__':

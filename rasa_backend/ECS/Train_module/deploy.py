@@ -3,9 +3,10 @@ from flask import Flask,jsonify
 import os
 from fetch_mongo import *
 import boto3
+from decouple import config
 global_init()
-access_key = 'AKIAYAPVILXZIAVZ3UN2'
-secret_access_key = '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'
+access_key = config('access_key')
+secret_access_key = config('secret_access_key')
 app = Flask(__name__)
 
 @app.route("/<name>", methods=['GET', 'POST'])

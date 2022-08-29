@@ -16,7 +16,7 @@ def main():
 def print_header():
     
 
-    print(Fore.RED + '****************  Open Notif  ****************')
+    print(Fore.RED + '****************  Hermes.ai  ****************')
     print(Fore.GREEN )
     print("Welcome to open_Notif!")
     print()
